@@ -28,7 +28,10 @@ RUN apk add --update \
   tiff-dev \
   libwebp-dev \
   openblas-dev@edgunity \
-  linux-headers
+  linux-headers \
+  python-dev \
+  vips-dev@testing \
+  fftw-dev@testing
   
 ENV CC /usr/bin/clang
 ENV CXX /usr/bin/clang++
@@ -44,5 +47,21 @@ RUN cd /opt && \
   make VERBOSE=1 && \
   make && \
   make install
+
+RUN apk del \
+  build-base \
+  clang \
+  clang-dev \
+  cmake \
+  git \
+  pkgconf \
+  wget \
+  libtbb-dev \
+  libjpeg-turbo-dev \
+  libpng-dev \
+  tiff-dev \
+  jasper \
+  python-dev \
+  py-numpy-dev
 
 RUN rm -rf /var/cache/apk/*
